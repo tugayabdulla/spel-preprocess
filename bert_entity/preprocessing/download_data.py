@@ -22,6 +22,7 @@ class DownloadWikiDump(PipelineJob):
     def _run(self):
         self.log("Download finished")
         filename = input("Enter full path: ")
+        print("Filename: ", filename)
         file_name = filename.split("/")[-1]
 
         final_directory = f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/"
