@@ -1,7 +1,7 @@
 debug: False
 wiki_lang_version: enwiki
 data_version_name: dummy
-download_data_only_dummy: True
+download_data_only_dummy: False
 num_most_freq_entities: 50000
 add_missing_conll_entities: True
 uncased: True

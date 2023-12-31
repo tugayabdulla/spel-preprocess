@@ -20,7 +20,14 @@ class DownloadWikiDump(PipelineJob):
         )
 
     def _run(self):
+        self.log("Download finished")
+        filename = input("Enter filename: ")
+        final_directory = f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/",
+        if not os.path.exists(final_directory):
+            os.makedirs(final_directory)
+        os.rename(filename, final_directory + filename)
 
+        return
         self.log(f"Downloading {self.opts.wiki_lang_version}")
         if self.opts.download_data_only_dummy:
             if self.opts.download_2017_enwiki:
@@ -29,12 +36,10 @@ class DownloadWikiDump(PipelineJob):
             else:
                 url = f"https://dumps.wikimedia.org/{self.opts.wiki_lang_version}/latest/"
                 accept = f"{self.opts.wiki_lang_version}-latest-pages-articles1.xml-*.bz2",
-
-            subprocess.check_call(
-                [
+            order = [
                     "wget",
                     "-r",
-                    "-l1",
+                    "-l2",
                     "-np",
                     "-nd",
                     url,
@@ -44,17 +49,18 @@ class DownloadWikiDump(PipelineJob):
                     f"data/versions/{self.opts.data_version_name}/downloads/tmp/",
                     # f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/",
                 ]
-            )
+            print(" ".join(order))
+            
+            subprocess.check_call(order)
         else:
             if self.opts.download_2017_enwiki:
                 url = "https://archive.org/download/enwiki-20171001/"
             else:
                 url = f"https://dumps.wikimedia.org/{self.opts.wiki_lang_version}/latest/"
-            subprocess.check_call(
-                [
+            cmd = [
                     "wget",
                     "-r",
-                    "-l1",
+                    "-l2",
                     "-np",
                     "-nd",
                     url,
@@ -65,8 +71,14 @@ class DownloadWikiDump(PipelineJob):
                     "-P",
                     f"data/versions/{self.opts.data_version_name}/downloads/tmp/",
                 ]
-            )
+            cmd = ["wget",
+                    "https://archive.org/download/enwiki-20171001/enwiki-20171001-pages-articles.xml.bz2",
+                     "-P",
+                    "data/versions/dummy/downloads/tmp/",
+                    ]
 
+            print(" ".join(cmd))
+            subprocess.check_call(cmd)
         os.rename(
             f"data/versions/{self.opts.data_version_name}/downloads/tmp/",
             f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/",

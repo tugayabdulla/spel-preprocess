@@ -9,7 +9,7 @@ import sys
 from collections import Counter
 from typing import Dict
 
-from WikiExtractor import main as wiki_extractor_main
+from wikiextractor.WikiExtractor import main as wiki_extractor_main
 from misc import normalize_wiki_entity
 from pipeline_job import PipelineJob
 
