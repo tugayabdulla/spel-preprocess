@@ -21,11 +21,13 @@ class DownloadWikiDump(PipelineJob):
 
     def _run(self):
         self.log("Download finished")
-        filename = input("Enter filename: ")
-        final_directory = f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/",
+        filename = input("Enter full path: ")
+        file_name = filename.split("/")[-1]
+
+        final_directory = f"data/versions/{self.opts.data_version_name}/downloads/{self.opts.wiki_lang_version}/"
         if not os.path.exists(final_directory):
             os.makedirs(final_directory)
-        os.rename(filename, final_directory + filename)
+        os.rename(filename, final_directory + file_name)
 
         return
         self.log(f"Downloading {self.opts.wiki_lang_version}")
