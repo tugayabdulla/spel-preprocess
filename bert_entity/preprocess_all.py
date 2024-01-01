@@ -74,7 +74,7 @@ PipelineJob.run_jobs([
     Wikiextractor,
     CollectMentionEntityCounts,
     PostProcessMentionEntityCounts,
-    #CreateAIDACONLL,
+    CreateAIDACONLL,
     CreateKeywordProcessor,
     CreateWikiTrainingData,
     CreateIntegerizedWikiTrainingData,

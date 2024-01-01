@@ -29,7 +29,7 @@ class PostProcessMentionEntityCounts(PipelineJob):
                 f"data/versions/{opts.data_version_name}/indexes/mention_entity_counter.pickle",
                 f"data/versions/{opts.data_version_name}/indexes/entity_counter.pickle",
                 f"data/versions/{opts.data_version_name}/indexes/linked_mention_counter.pickle",
-                f"data/versions/{opts.data_version_name}/indexes/found_conll_entities.pickle",
+            #    f"data/versions/{opts.data_version_name}/indexes/found_conll_entities.pickle",
             ],
             provides=[
                 f"data/versions/{opts.data_version_name}/indexes/mention_entity_counter_popular_entities.pickle",
