@@ -25,7 +25,7 @@ parser.add_argument("--wiki_lang_version", type=str, help="wiki language version
 parser.add_argument("--data_version_name", type=str, help="data identifier/version")
 parser.add_argument("--download_data_only_dummy", type=argparse_bool_type, help="only download one wiki file")
 parser.add_argument("--download_2017_enwiki", type=argparse_bool_type, help="download the enwiki 2017 dump to reproduce the experiments for the CONLL 2019 paper", default=True)
-parser.add_argument("--num_most_freq_entities", type=int, help="")
+parser.add_argument("--num_most_freq_entities", type=int, help="", default=500_000)
 parser.add_argument("--add_missing_conll_entities", type=argparse_bool_type, help="")
 parser.add_argument("--uncased", type=argparse_bool_type, default=True)
 
