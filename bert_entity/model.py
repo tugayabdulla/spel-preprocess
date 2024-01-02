@@ -283,7 +283,7 @@ class Net(nn.Module):
         all_token_ids = numpy.array(list(chain(*all_token_ids)))
 
         num_proposed = len(y_pred[(vocab.OUTSIDE_ID > y_pred) & (all_token_ids > 0)])
-        num_correct = (((y_true == y_pred) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0))).astype(numpy.int).sum()
+        num_correct = (((y_true == y_pred) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0))).astype(numpy.int8).sum()
         num_gold = len(y_true[(vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0)])
 
         new_metrics = Metrics(
