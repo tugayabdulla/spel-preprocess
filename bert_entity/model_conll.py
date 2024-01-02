@@ -451,7 +451,7 @@ class ConllNet(nn.Module):
 
         num_correct_gold_mentions = (
             (((y_true == y_pred_gold_mentions) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0)))
-            .astype(numpy.int)
+            .astype(numpy.int8)
             .sum()
         )
 
