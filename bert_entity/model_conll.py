@@ -447,7 +447,7 @@ class ConllNet(nn.Module):
         num_lenient_correct_gold_mentions = len(set(overlaps_gold_mentions))
 
         num_proposed = len(y_pred[(vocab.OUTSIDE_ID > y_pred) & (all_token_ids > 0)])
-        num_correct = (((y_true == y_pred) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0))).astype(numpy.int).sum()
+        num_correct = (((y_true == y_pred) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0))).astype(numpy.int8).sum()
 
         num_correct_gold_mentions = (
             (((y_true == y_pred_gold_mentions) & (vocab.OUTSIDE_ID > y_true) & (all_token_ids > 0)))
