@@ -86,6 +86,7 @@ if __name__ == "__main__":
             vocab=vocab,
             metrics=metrics,
         )
+        print(metrics)
 
     if not args.eval_on_test_only:
         for epoch in range(start_epoch, args.n_epochs + 1):
