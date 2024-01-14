@@ -14,7 +14,7 @@ from typing import Dict
 
 from misc import normalize_wiki_entity, get_stopwordless_token_set
 from pipeline_job import PipelineJob
-from pytorch_pretrained_bert import BertTokenizer
+from transformers import AutoTokenizer
 
 
 class CreateWikiTrainingData(PipelineJob):
@@ -81,11 +81,8 @@ class CreateWikiTrainingData(PipelineJob):
         #
         # start the workers in individual processes
         #
+        tokenizer = AutoTokenizer.from_pretrained("roberta-base")
 
-        if self.opts.uncased:
-            tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
-        else:
-            tokenizer = BertTokenizer.from_pretrained("bert-base-cased", do_lower_case=False)
 
         for id in range(self.opts.create_training_data_num_workers):
             worker = Worker(
