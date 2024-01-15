@@ -81,8 +81,16 @@ class CreateWikiTrainingData(PipelineJob):
         #
         # start the workers in individual processes
         #
-        tokenizer = AutoTokenizer.from_pretrained("roberta-base")
 
+        MAX_SEQUENCE_LENGTH = 4096
+        MODEL_NAME_OR_PATH = "markussagen/xlm-roberta-longformer-base-4096"
+
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME_OR_PATH,
+            max_length=MAX_SEQUENCE_LENGTH,
+            padding="max_length",
+            truncation=True,
+        )
 
         for id in range(self.opts.create_training_data_num_workers):
             worker = Worker(

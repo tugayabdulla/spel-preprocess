@@ -25,8 +25,16 @@ class CreateIntegerizedCONLLTrainingData(PipelineJob):
         with open(f"data/versions/{self.opts.data_version_name}/indexes/popular_entity_to_id_dict.pickle", "rb") as f:
             popular_entity_to_id_dict = pickle.load(f)
 
-        tokenizer = AutoTokenizer.from_pretrained("roberta-base",)
 
+        MAX_SEQUENCE_LENGTH = 4096
+        MODEL_NAME_OR_PATH = "markussagen/xlm-roberta-longformer-base-4096"
+
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME_OR_PATH,
+            max_length=MAX_SEQUENCE_LENGTH,
+            padding="max_length",
+            truncation=True,
+        )
         # collect train valid test portionas and transform into our format
 
         train = list()
