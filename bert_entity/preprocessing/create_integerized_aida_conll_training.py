@@ -26,12 +26,11 @@ class CreateIntegerizedCONLLTrainingData(PipelineJob):
             popular_entity_to_id_dict = pickle.load(f)
 
 
-        MAX_SEQUENCE_LENGTH = 4096
-        MODEL_NAME_OR_PATH = "markussagen/xlm-roberta-longformer-base-4096"
+        MODEL_NAME_OR_PATH = "roberta-base"
 
         tokenizer = AutoTokenizer.from_pretrained(
             MODEL_NAME_OR_PATH,
-            max_length=MAX_SEQUENCE_LENGTH,
+            max_length=512,
             padding="max_length",
             truncation=True,
         )
