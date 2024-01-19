@@ -48,8 +48,9 @@ class CollectMentionEntityCounts(PipelineJob):
 
         workers = list()
 
-        list_dir_string = f"data/versions/{self.opts.data_version_name}/wikiextractor_out/{self.opts.wiki_lang_version}/{self.opts.wiki_lang_version}*pages-articles*/*/wiki_*"
-
+        list_dir_string = f"data/versions/{self.opts.data_version_name}/wikiextractor_out/{self.opts.wiki_lang_version}//*/*/wiki_*"
+        files = glob.glob(list_dir_string)
+        self.log(f"Found {len(files)} files")
         #
         # start the workers in individual processes
         #
