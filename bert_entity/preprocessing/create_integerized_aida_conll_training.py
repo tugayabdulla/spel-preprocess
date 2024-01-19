@@ -2,8 +2,7 @@ import pickle
 from typing import Dict
 
 from pipeline_job import PipelineJob
-from pytorch_pretrained_bert import BertTokenizer
-
+from transformers import AutoTokenizer
 
 class CreateIntegerizedCONLLTrainingData(PipelineJob):
     def __init__(self, preprocess_jobs: Dict[str, PipelineJob], opts):
@@ -25,8 +24,14 @@ class CreateIntegerizedCONLLTrainingData(PipelineJob):
         with open(f"data/versions/{self.opts.data_version_name}/indexes/popular_entity_to_id_dict.pickle", "rb") as f:
             popular_entity_to_id_dict = pickle.load(f)
 
-        tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
+        MODEL_NAME_OR_PATH = "roberta-base"
 
+        tokenizer = AutoTokenizer.from_pretrained(
+            MODEL_NAME_OR_PATH,
+            max_length=512,
+            padding="max_length",
+            truncation=True,
+        )
         # collect train valid test portionas and transform into our format
 
         train = list()
