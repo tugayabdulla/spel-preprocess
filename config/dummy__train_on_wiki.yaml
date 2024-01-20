@@ -8,7 +8,7 @@ data_version_name: dummy
 wiki_lang_version: enwiki
 eval_on_test_only: False
 out_device: 0
-batch_size: 16
+batch_size: 8
 eval_batch_size: 1
 accumulate_batch_gradients: 8
 sparse: True
