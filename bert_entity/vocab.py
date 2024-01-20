@@ -1,7 +1,6 @@
 import pickle
 
-from transformers import AutoTokenizer
-
+from pytorch_pretrained_bert import BertTokenizer
 
 class Vocab:
     def __init__(self, args=None):
@@ -20,14 +19,10 @@ class Vocab:
             with open(f"data/versions/{args.data_version_name}/indexes/popular_entity_to_id_dict.pickle", "rb") as f:
                 popular_entity_to_id_dict = pickle.load(f)
 
-        MODEL_NAME_OR_PATH = "roberta-base"
-
-        tokenizer = AutoTokenizer.from_pretrained(
-            MODEL_NAME_OR_PATH,
-            max_length=512,
-            padding="max_length",
-        )
-
+        if args.uncased:
+            tokenizer = BertTokenizer.from_pretrained("bert-base-uncased", do_lower_case=True)
+        else:
+            tokenizer = BertTokenizer.from_pretrained("bert-base-cased", do_lower_case=False)
         self.tag2idx = popular_entity_to_id_dict
 
         self.OUTSIDE_ID = len(self.tag2idx)
