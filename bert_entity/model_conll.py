@@ -19,7 +19,7 @@ from misc import (
     create_overlapping_chunks,
     get_topk_ids_aggregated_from_seq_prediction,
 )
-from pytorch_pretrained_bert import BertModel
+from transformers import RobertaModel
 
 bio_id = {
     "B": 0,
@@ -38,10 +38,7 @@ class ConllNet(nn.Module):
         self, args, vocab_size=None,
     ):
         super().__init__()
-        if args.uncased:
-            self.bert = BertModel.from_pretrained("bert-base-uncased")
-        else:
-            self.bert = BertModel.from_pretrained("bert-base-cased")
+        self.bert = RobertaModel.from_pretrained("roberta-base")
 
         self.top_rnns = args.top_rnns
         if args.top_rnns:

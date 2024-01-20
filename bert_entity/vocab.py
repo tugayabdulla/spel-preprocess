@@ -20,15 +20,14 @@ class Vocab:
             with open(f"data/versions/{args.data_version_name}/indexes/popular_entity_to_id_dict.pickle", "rb") as f:
                 popular_entity_to_id_dict = pickle.load(f)
 
-        MAX_SEQUENCE_LENGTH = 4096
-        MODEL_NAME_OR_PATH = "markussagen/xlm-roberta-longformer-base-4096"
+        MODEL_NAME_OR_PATH = "roberta-base"
 
         tokenizer = AutoTokenizer.from_pretrained(
             MODEL_NAME_OR_PATH,
-            max_length=MAX_SEQUENCE_LENGTH,
+            max_length=512,
             padding="max_length",
-            truncation=True,
         )
+
         self.tag2idx = popular_entity_to_id_dict
 
         self.OUTSIDE_ID = len(self.tag2idx)
